@@ -29,3 +29,21 @@ var questions = [
         answer: "<ul>"
     }
 ]
+
+
+let currentQuestrionIndex = 0;
+let timerLeft = 60;
+
+// start quiz function 
+function startQuiz () {
+    //hide intro container and show the question container 
+    introContainer.classList.add('hide');
+    questionContainer.classList.remove('hide');
+
+    //start timer
+    startTimer();
+
+    // display first question 
+    displayQuestion();
+}
+
