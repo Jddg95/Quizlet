@@ -2,29 +2,28 @@ var startBtn = document.getElementById("startBtn");
 var introContainer = document.getElementById("intro-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("timer");
-var questionsEl = document.getElementById("question");
 var answerChoiceEl = document.getElementById("answer-choices");
 
 
 const questions = [
     {
-        question: "What keyword is used to declare a variable in JavaScript?"
+        question: "What keyword is used to declare a variable in JavaScript?",
         choices: ["var", "let", "const", "variable"],
         answer: "var"
     },
     {
-        question: "What HTML tag is used to create a hyperlink?"
+        question: "What HTML tag is used to create a hyperlink?",
         choices: ["<link>", "<url>", "<a>", "href"],
         answer: "<link>"
 
     },
     {
-        question: "How can you include an external CSS file in an HTML document?"
+        question: "How can you include an external CSS file in an HTML document?",
         choices: ["<style>", "<link>", "<css>", "<script>"],
         answer: "<link>"
     },
     {
-        question: "Which HTML tag is used to define a list of items, such as a bulleted or numbered list?"
+        question: "Which HTML tag is used to define a list of items, such as a bulleted or numbered list?",
         choices: ["<list>", "<ul>", "<li>", "<ol>"],
         answer: "<ul>"
     }
@@ -46,30 +45,6 @@ function startTimer() {
             timeLeft--;
         }
     }, 1000);
-}
-
-startBtn.addEventListener(`click`, startQuiz);// start quiz function 
-
-function timer () {
-    var timeInterval = setInterval(function() {
-        timerEl.textContent = timeLeft + "s";
-        timeLeft--;
-
-        if (result.textContent.match()) {
-            timeLeft -=10;
-        }
-
-        if (timeLeft < 0 || scores.length === questions.length) {
-            clearInterval(timeInterval);
-
-            alert("Quiz is over");
-            timerEl.textContent = 0 + "s";
-
-            index += questions.length;
-
-            createQuiz()
-        }
-    })   
 }
 
 function startQuiz () {
