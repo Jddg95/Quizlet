@@ -6,7 +6,7 @@ var questionsEl = document.getElementById("question");
 var answerChoiceEl = document.getElementById("answer-choices");
 
 
-var questions = [
+const questions = [
     {
         question: "What keyword is used to declare a variable in JavaScript?"
         choices: ["var", "let", "const", "variable"],
@@ -31,10 +31,47 @@ var questions = [
 ]
 
 
-let currentQuestrionIndex = 0;
-let timerLeft = 60;
+var currentQuestrionIndex = 0;
+var timeLeft = 60;
 
-// start quiz function 
+function startTimer() {
+    const timerInterval = setInterval(function() {
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            //Handle when the timer reaches 0 
+            alert(`Time is up!`);
+        } else {
+            // update the timer element with the remaining time 
+            timerEl.textContent = `Time: ${timeLeft} seconds`;
+            timeLeft--;
+        }
+    }, 1000);
+}
+
+startBtn.addEventListener(`click`, startQuiz);// start quiz function 
+
+function timer () {
+    var timeInterval = setInterval(function() {
+        timerEl.textContent = timeLeft + "s";
+        timeLeft--;
+
+        if (result.textContent.match()) {
+            timeLeft -=10;
+        }
+
+        if (timeLeft < 0 || scores.length === questions.length) {
+            clearInterval(timeInterval);
+
+            alert("Quiz is over");
+            timerEl.textContent = 0 + "s";
+
+            index += questions.length;
+
+            createQuiz()
+        }
+    })   
+}
+
 function startQuiz () {
     //hide intro container and show the question container 
     introContainer.classList.add('hide');
@@ -47,3 +84,46 @@ function startQuiz () {
     displayQuestion();
 }
 
+// display a question 
+
+function displayQuestion() {
+    const currentQuestrion = questions[currentQuestrionIndex];
+    answerChoiceEl.innerHTML = ``;
+
+    for (let i = 0; i < currentQuestrion.choices.length; i++) {
+        const choice = currentQuestrion.choices[i];
+
+        //Create a button for each answer choice
+        const choiceButton = document.createElement(`button`);
+        choiceButton.textContent = choice;
+        choiceButton.classList.add(`choiceBtn`);
+        answerChoiceEl.appendChild(choiceButton);
+
+        // add event listener to handle users answer 
+        choiceButton.addEventListener(`click`, function() {
+            //check if the selected answer is correct
+            if (choice === currentQuestrion.answer) {
+                //handle correct answer (you can update the score here)
+                console.log(`Correct!`);
+            } else {
+                // handle incorrect answer (you can update the score here)
+                console.log (`Incorrect!`);
+            }
+
+            // move to the next question
+            currentQuestrionIndex++;
+
+            if (currentQuestrionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                //quiz is over
+                console.log(`Quiz is over!`);
+            }
+        });
+
+    }
+}
+
+// Add event listener to start quiz button 
+
+startBtn.addEventListener(`click`, startQuiz);
