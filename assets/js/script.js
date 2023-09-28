@@ -3,7 +3,6 @@ var introContainer = document.getElementById("intro-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("timer");
 var answerChoiceEl = document.getElementById("answer-choice");
-var highScoresContainer 
 
 const questions = [
   {
@@ -204,11 +203,6 @@ function displayHighScores() {
   highScores.sort(function (a, b) {
     return b.score - a.score;
   });
-}
-
-// clear the high score list
-function clearHighScores() {
-highScoreList.innerHTML = "";
 }
 
 // Display each high schore in the list 
