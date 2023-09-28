@@ -33,10 +33,10 @@ var timeLeft = 45;
 
 function startTimer() {
   const timerInterval = setInterval(function () {
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0 || currentQuestionIndex >= questions.length) {
       clearInterval(timerInterval);
       //Handle when the timer reaches 0
-      alert(`Time is up!`);
+      endQuiz();
     } else {
       // update the timer element with the remaining time
       timerEl.textContent = `Time: ${timeLeft} seconds`;
@@ -109,8 +109,26 @@ function displayQuestion() {
         console.log(`Quiz is over!`);
       }
     });
+    function endQuiz() {
+
+    }
   }
 }
 
 // Add event listener to start quiz button
 startBtn.addEventListener(`click`, startQuiz);
+
+function endQuiz() {
+  // hide question container 
+  questionContainer.classList.add(`hide`);
+
+  //show end container 
+  endContainer.classList.remove(`hide`);
+
+  // stop the timer (if its still running)
+  clearInterval(timerInterval);
+}
+
+if (currentQuestionIndex >= questions.length) {
+  endQuiz();
+}
