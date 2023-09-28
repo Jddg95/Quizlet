@@ -47,6 +47,22 @@ function startTimer() {
     }, 1000);
 }
 
+
+function startTimer() {
+    const timerInterval = setInterval(function() {
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            // Handle when the timer reaches 0 
+            alert("Time is up!");
+        } else {
+            // Update the timer element with the remaining time 
+            timerEl.textContent = `Time: ${timeLeft} seconds`;
+            timeLeft--;
+        }
+    }, 1000);
+}
+
+
 function startQuiz () {
     //hide intro container and show the question container 
     introContainer.classList.add('hide');
