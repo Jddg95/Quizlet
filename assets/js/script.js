@@ -31,8 +31,10 @@ const questions = [
 var currentQuestionIndex = 0;
 var timeLeft = 45;
 
+var timerInterval;
+
 function startTimer() {
-  const timerInterval = setInterval(function () {
+   timerInterval = setInterval(function () {
     if (timeLeft <= 0 || currentQuestionIndex >= questions.length) {
       clearInterval(timerInterval);
       //Handle when the timer reaches 0
@@ -44,6 +46,8 @@ function startTimer() {
     }
   }, 1000);
 }
+// Add event listener to start quiz button
+startBtn.addEventListener(`click`, startQuiz);
 
 function startQuiz() {
   //hide intro container and show the question container
@@ -106,29 +110,24 @@ function displayQuestion() {
         displayQuestion();
       } else {
         //quiz is over
+        endQuiz();
         console.log(`Quiz is over!`);
       }
     });
     function endQuiz() {
-
-    }
+      // hide question container 
+      questionContainer.classList.add(`hide`);
+    
+      //show end container 
+      endContainer.classList.remove(`hide`);
+    
+      // stop the timer (if its still running)
+      clearInterval(timerInterval);
+    }    
   }
-}
-
-// Add event listener to start quiz button
-startBtn.addEventListener(`click`, startQuiz);
-
-function endQuiz() {
-  // hide question container 
-  questionContainer.classList.add(`hide`);
-
-  //show end container 
-  endContainer.classList.remove(`hide`);
-
-  // stop the timer (if its still running)
-  clearInterval(timerInterval);
 }
 
 if (currentQuestionIndex >= questions.length) {
   endQuiz();
 }
+
