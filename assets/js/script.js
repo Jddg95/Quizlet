@@ -3,6 +3,7 @@ var introContainer = document.getElementById("intro-container");
 var questionContainer = document.getElementById("question-container");
 var timerEl = document.getElementById("timer");
 var answerChoiceEl = document.getElementById("answer-choice");
+var highScoresContainer 
 
 const questions = [
   {
@@ -30,7 +31,6 @@ const questions = [
 
 var currentQuestionIndex = 0;
 var timeLeft = 45;
-
 var timerInterval;
 
 function startTimer() {
@@ -130,4 +130,91 @@ function displayQuestion() {
 if (currentQuestionIndex >= questions.length) {
   endQuiz();
 }
+
+var submitBtn = document.getElementById("submitBtn");
+submitBtn.addEventListener("click", function (event) {
+  // prevent froom submitting and refreshing the page
+  event.preventDefault();
+
+  // retriving users initials from input 
+  var initialsInput = document.getElementById("initials");
+  var userInitials = initialsInput.value;
+
+  // calculate users score 
+  var userScore = calculateScore();
+
+  //store the users initials ans score in an array or object 
+  var userResult = { initials: userInitials, score: userScore };
+
+  // save users results to storage as an array 
+  saveUserResults(userResult)
+
+  //display confirmation message 
+  console.log("Initials and score saved:" , userResult);
+  resetQuiz();
+});
+
+function resetQuiz() {
+  // clear users initials from the input field 
+  initialsInput.value = "";
+
+  //reset curent question index and timer
+  currentQuestionIndex = 0;
+  timeLeft = 45;
+
+  // hide score if visible 
+  highScoresContainer.classList.add("hide");
+  endContainer.classList.add("hide");
+
+  // start quiz again 
+  startQuiz();
+}
+
+
+function calcuateScore() {
+
+  return;
+}
+
+var viewHighscoresLink = document.getElementById("view-high-scores");
+var highScoresContainer = document.getElementById("high-scores-container");
+var highScoresList = document.getElementById("high-scores-list");
+
+viewHighscoresLink.addEventListener("click", function (event) {
+  displayHighScores();
+
+  highScoresContainer.classList.remove("hide");
+
+  if (highScores) {
+    console.log("High Scores:", highScores);
+  }
+});
+
+function displayHighScores() {
+  highScoreList.innerHTML = "";
+  // hide the main container to show high scores 
+  introContainer.classList.add("hide");
+  questionContainer.classList.add("hide");
+  highScoresContainer.classList.remove("hide");
+
+  // retriving high scores in desending order by score 
+  var highScores = JSON.parse(localStorage.getItem("quizResults")) || [];
+
+  //sort high scores from local storage 
+  highScores.sort(function (a, b) {
+    return b.score - a.score;
+  });
+}
+
+// clear the high score list
+function clearHighScores() {
+highScoreList.innerHTML = "";
+}
+
+// Display each high schore in the list 
+highScores.forEach(function (scoreData) {
+  var li = document.createElement("li");
+  li.textContent = `${scoreData.initials}: ${scoreData.score}`;
+  highScoreList.appendChild(li);
+});
 
