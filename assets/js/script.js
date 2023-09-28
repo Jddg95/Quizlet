@@ -29,7 +29,7 @@ const questions = [
 ];
 
 var currentQuestionIndex = 0;
-var timeLeft = 60;
+var timeLeft = 45;
 
 function startTimer() {
   const timerInterval = setInterval(function () {
@@ -86,6 +86,17 @@ function displayQuestion() {
       } else {
         // handle incorrect answer (you can update the score here)
         console.log(`Incorrect!`);
+
+        // subtract time 
+        timeLeft -= 10;
+
+        // ensure timeLeft doesnt go negative
+        if (timeLeft < 0) {
+          timeLeft = 0;
+        }
+
+        // update timer display 
+        timerEl.textContent = `Time: ${timeLeft} seconds`;
       }
 
       // move to the next question
