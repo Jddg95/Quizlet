@@ -93,7 +93,7 @@ function displayQuestion() {
             // move to the next question
             currentQuestionIndex++;
 
-            if (currentQuestrionIndex < questions.length) {
+            if (currentQuestionIndex < questions.length) {
                 displayQuestion();
             } else {
                 //quiz is over
